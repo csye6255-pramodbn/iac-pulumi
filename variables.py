@@ -12,7 +12,7 @@ private_subnet_cidr = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 
 
 
-
+###############################################################################
 # Get CLI configs from pulumi config file
 # Get CLI configs
 cli_profile = config.get('profile')
