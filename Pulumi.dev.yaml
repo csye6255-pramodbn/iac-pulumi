@@ -6,4 +6,3 @@ config:
   Infra:region: us-east-2
   Infra:vpc_cidr: 10.0.0.0/16
   Infra:vpc_name: My-VPC1
-  Infra:zone: a,b,c
