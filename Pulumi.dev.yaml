@@ -1,1 +1,8 @@
-encryptionsalt: v1:EKyS1o+Q0ac=:v1:AxbFAXlJGRy6JK7k:jK2A+jEWqwMoEyLcwsSi3Rxa/scldw==
+encryptionsalt: v1:LHwCp227rKw=:v1:I6/D926EvPdveXrI:E3RnW5oBd7uzABlMDp6aOCrQ+5w3KA==
+config:
+  Infra:private_subnet_cidr: 10.0.4.0/24,10.0.5.0/24,10.0.6.0/24
+  Infra:profile: dev
+  Infra:public_subnet_cidr: 10.0.1.0/24,10.0.2.0/24,10.0.3.0/24
+  Infra:region: us-east-2
+  Infra:vpc_cidr: 10.0.0.0/16
+  Infra:vpc_name: My-VPC1
