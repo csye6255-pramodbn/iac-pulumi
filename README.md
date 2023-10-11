@@ -1,6 +1,3 @@
-## Name : Pramod Begur Nagaraj
-## NUID: 002708842
-
 # Pulumi IaC
 
 ## AWS Networking Setup
@@ -13,20 +10,20 @@ The code does the following:
 6. Creates a public route in the public route table created above with the destination CIDR block 0.0.0.0/0 and the internet gateway created above as the target
 
 ## Prerequisites
-1. Install pulumi on your local system
-2. Setup an AWS account
-3. Install AWS CLI and setup a profile in your local system
-4. Clone this repo in you local system and go inside that directory
-
+1. Install Python on your local system
+2. Install Pulumi on your local system
+3. Setup an AWS account
+4. Install AWS CLI and setup a profile in your local system
+5. Clone this repo in you local system and go inside that directory
 
 ## How to set up the pulumi environment before executing
 Run the following commands:
 1. python -m venv venv
-venv\Scripts\activate
-2. pip install -r requirements.txt
-3. pulumi plugin install
-4. pulumi stack init [stack_name]
-5. pulumi stack select [stack_name]
+2. venv\Scripts\activate
+3. pip install -r requirements.txt
+4. pulumi plugin install
+5. pulumi stack init [stack_name]
+6. pulumi stack select [stack_name]
 
 ## How to create resources (executing pulumi)
 1. pulumi up
@@ -34,12 +31,15 @@ venv\Scripts\activate
 
 Once "pulumi up" is run, the aforementioned resources would be created using the default variables.
 
+## CLI Commands
 In order to create the above network stack using self-defined variables, you may customize the command mentioned below and run it:
 
-pulumi config set profile dev region us-west-2 vpc_name My-VPC vpc_cidr 10.1.0.0/16 public_subnet_cidr 10.1.1.0/24,10.1.2.0/24,10.1.3.0/24 private_subnet_cidr 10.1.4.0/24,10.1.5.0/24,10.1.6.0/24
+pulumi config set profile dev && pulumi config set region us-west-2 && pulumi config set vpc_name My-VPC && pulumi config set vpc_cidr 10.1.0.0/16 && pulumi config set public_subnet_cidr 10.1.1.0/24,10.1.2.0/24,10.1.3.0/24 && pulumi config set private_subnet_cidr 10.1.4.0/24,10.1.5.0/24,10.1.6.0/24
 
-You can replace with custom values 
+You can replace with custom values in cli
 or you can directly change the custom values in variables.py and then run "pulumi up"
+
+Note: If you provide variables via the CLI, the default values will be overridden.
 
 ## How to destroy resources ?
 Run the following command:
