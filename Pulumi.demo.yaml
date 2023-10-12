@@ -5,4 +5,4 @@ config:
   Infra:vpc_cidr: 10.200.0.0/16
   Infra:vpc_name: My-VPC2
   aws:profile: demo
-  aws:region: us-west-1
+  aws:region: us-west-2
