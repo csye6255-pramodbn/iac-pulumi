@@ -39,11 +39,12 @@ public_subnets = []
 private_subnets = []
 
 # Public Subnets Creation
-for i in range(len(public_subnet_cidr)):
+num_subnets_to_create = min(len(public_subnet_cidr), len(avail_zones.names))
+
+for i in range(num_subnets_to_create):
     subnet_name = f"public_subnet_{i+1}"
     # Using modulo to cycle through AZs
     az_index = i % len(avail_zones.names)
-    public_subnet_cidr[i]
     subnet = ec2.Subnet(
         subnet_name,
         vpc_id=vpc.id,
@@ -53,6 +54,7 @@ for i in range(len(public_subnet_cidr)):
         tags={'Name': subnet_name}
     )
     public_subnets.append(subnet)
+
 
     # Public RouteTable Association
     ec2.RouteTableAssociation(
@@ -70,7 +72,9 @@ for i in range(len(public_subnet_cidr)):
     )
     
 # Private Subnets Creation
-for i in range(len(private_subnet_cidr)):
+num_private_subnets_to_create = min(len(private_subnet_cidr), len(avail_zones.names))
+
+for i in range(num_private_subnets_to_create):
     subnet_name = f"private_subnet_{i+1}"
     # Using modulo to cycle through AZs
     az_index = i % len(avail_zones.names)
@@ -82,6 +86,7 @@ for i in range(len(private_subnet_cidr)):
         tags={'Name': subnet_name}
     )
     private_subnets.append(subnet)
+
 
     # Private RouteTable Association
     ec2.RouteTableAssociation(
