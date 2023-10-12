@@ -1,13 +1,7 @@
 import pulumi
-from pulumi_aws import ec2, Provider
 from pulumi_aws import ec2, get_availability_zones
-from variables import vpc_cidr, public_subnet_cidr, private_subnet_cidr, vpc_name
-from provider import aws_provider
-#config = pulumi.Config()
-#vpc_name = config.require("vpc_name")
-#vpc_cidr = config.require("vpc_cidr")
-#public_subnet_cidr = config.require_object("public_subnet_cidr")
-#private_subnet_cidr = config.require_object("private_subnet_cidr")
+from variables import vpc_cidr, private_subnet_cidr, public_subnet_cidr, vpc_name
+
 
 avail_zones = get_availability_zones(state="available")
 
@@ -45,10 +39,12 @@ public_subnets = []
 private_subnets = []
 
 # Public Subnets Creation
+
 for i in range(len(public_subnet_cidr)):
     subnet_name = f"public_subnet_{i+1}"
     # Using modulo to cycle through AZs
     az_index = i % len(avail_zones.names)
+    public_subnet_cidr[i]
     subnet = ec2.Subnet(
         subnet_name,
         vpc_id=vpc.id,
