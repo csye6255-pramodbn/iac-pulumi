@@ -37,12 +37,13 @@ Once "pulumi up" is run, the aforementioned resources would be created using the
 ## CLI Commands
 In order to create the above network stack using self-defined variables, you may customize the command mentioned below and run it:
 
-pulumi config set profile dev && pulumi config set region us-west-2 && pulumi config set vpc_name My-VPC && pulumi config set vpc_cidr 10.1.0.0/16 && pulumi config set public_subnet_cidr 10.1.1.0/24,10.1.2.0/24,10.1.3.0/24 && pulumi config set private_subnet_cidr 10.1.4.0/24,10.1.5.0/24,10.1.6.0/24
+pulumi config set aws:profile dev ; pulumi config set aws:region us-east-1 ; pulumi config set vpc_name My-VPC1 ; pulumi config set vpc_cidr 10.1.0.0/16 ; pulumi config set public_subnets_cidr 10.1.1.0/24,10.1.2.0/24,10.1.3.0/24 ; pulumi config set private_subnets_cidr 10.1.4.0/24,10.1.5.0/24,10.1.6.0/24
 
 You can replace with custom values in cli
 or you can directly change the custom values in variables.py and then run "pulumi up"
 
-Note: If you provide variables via the CLI, the default values will be overridden.
+Note 1: If you provide variables via the CLI, the default values will be overridden.
+Note 2: If "region" is not specified in cli it takes the default from AWS Configure (AWS CLI)
 
 ## How to destroy resources ?
 Run the following command:

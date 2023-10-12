@@ -1,19 +1,23 @@
 import pulumi
 from pulumi_aws import ec2, Provider
+from pulumi_aws import ec2, get_availability_zones
 from variables import vpc_cidr, public_subnet_cidr, private_subnet_cidr, vpc_name
-
+from provider import aws_provider
 #config = pulumi.Config()
 #vpc_name = config.require("vpc_name")
 #vpc_cidr = config.require("vpc_cidr")
 #public_subnet_cidr = config.require_object("public_subnet_cidr")
 #private_subnet_cidr = config.require_object("private_subnet_cidr")
 
+avail_zones = get_availability_zones(state="available")
+
 # Creating VPC
 vpc = ec2.Vpc(
     "custom_vpc",
     cidr_block=vpc_cidr,
     enable_dns_hostnames=True,
-    tags={'Name':vpc_name}
+    enable_dns_support=True,
+    tags={'Name':vpc_name},
 )
 
 # Internet Gateway
@@ -43,10 +47,13 @@ private_subnets = []
 # Public Subnets Creation
 for i in range(len(public_subnet_cidr)):
     subnet_name = f"public_subnet_{i+1}"
+    # Using modulo to cycle through AZs
+    az_index = i % len(avail_zones.names)
     subnet = ec2.Subnet(
         subnet_name,
         vpc_id=vpc.id,
         cidr_block=public_subnet_cidr[i],
+        availability_zone=avail_zones.names[az_index],  # Assign AZ dynamically
         map_public_ip_on_launch=True,  # Setting to True for auto assigning public IP
         tags={'Name': subnet_name}
     )
@@ -67,13 +74,15 @@ for i in range(len(public_subnet_cidr)):
         gateway_id=internet_gateway.id
     )
 
-# Private Subnet Creation
 for i in range(len(private_subnet_cidr)):
     subnet_name = f"private_subnet_{i+1}"
+    # Using modulo to cycle through AZs
+    az_index = i % len(avail_zones.names)
     subnet = ec2.Subnet(
         subnet_name,
         vpc_id=vpc.id,
         cidr_block=private_subnet_cidr[i],
+        availability_zone=avail_zones.names[az_index],  # Assign AZ dynamically
         tags={'Name': subnet_name}
     )
     private_subnets.append(subnet)
