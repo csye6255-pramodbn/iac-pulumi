@@ -1,8 +1,8 @@
-encryptionsalt: v1:LHwCp227rKw=:v1:I6/D926EvPdveXrI:E3RnW5oBd7uzABlMDp6aOCrQ+5w3KA==
+encryptionsalt: v1:2+F5i19gL/0=:v1:KynzAVyz2i9hHDfM:y1cQBSNukB7vLmlhDAiyLnIzI569QA==
 config:
-  Infra:private_subnet_cidr: 10.0.4.0/24,10.0.5.0/24,10.0.6.0/24
-  Infra:profile: dev
-  Infra:public_subnet_cidr: 10.0.1.0/24,10.0.2.0/24,10.0.3.0/24
-  Infra:region: us-east-2
-  Infra:vpc_cidr: 10.0.0.0/16
+  Infra:private_subnets_cidr: 10.1.4.0/24,10.1.5.0/24,10.1.6.0/24
+  Infra:public_subnets_cidr: 10.1.1.0/24,10.1.2.0/24,10.1.3.0/24
+  Infra:vpc_cidr: 10.1.0.0/16
   Infra:vpc_name: My-VPC1
+  aws:profile: dev
+  aws:region: us-east-1
