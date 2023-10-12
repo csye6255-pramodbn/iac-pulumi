@@ -39,7 +39,6 @@ public_subnets = []
 private_subnets = []
 
 # Public Subnets Creation
-
 for i in range(len(public_subnet_cidr)):
     subnet_name = f"public_subnet_{i+1}"
     # Using modulo to cycle through AZs
@@ -69,7 +68,8 @@ for i in range(len(public_subnet_cidr)):
         destination_cidr_block="0.0.0.0/0",
         gateway_id=internet_gateway.id
     )
-
+    
+# Private Subnets Creation
 for i in range(len(private_subnet_cidr)):
     subnet_name = f"private_subnet_{i+1}"
     # Using modulo to cycle through AZs
