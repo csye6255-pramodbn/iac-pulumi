@@ -1,32 +1,39 @@
 import pulumi
 from pulumi_aws import ec2
-from variables import security_group_name, sg_ingress_ports
+from ports import ingress_rules, egress_rules
 from myVPC import vpc
+from variables import security_group_name
 
-security_group = ec2.SecurityGroup('security-group',
-                          name=security_group_name,
-                          description='ssh-http-https-8080',
-                          vpc_id=vpc.id,
-                          ingress=[
-                              ec2.SecurityGroupIngressArgs(
-                                  protocol="tcp",
-                                  from_port=port,
-                                  to_port=port,
-                                  cidr_blocks=["0.0.0.0/0"],
-                                  ipv6_cidr_blocks=["::/0"]
-                              ) for port in sg_ingress_ports
-                          ],
-                          egress=[
-                              ec2.SecurityGroupEgressArgs(
-                                  protocol="-1",
-                                  from_port=0,
-                                  to_port=0,
-                                  cidr_blocks=["0.0.0.0/0"],
-                                  ipv6_cidr_blocks=["::/0"]
-                              )
-                          ],
-                          tags={
-                              "Name": security_group_name
-                          })
 
+def transform_rules(rules):
+    transformed = []
+    for rule in rules:
+        transformed_rule = {
+            "description": rule.get("description", ""),
+            "from_port": rule["fromPort"],
+            "to_port": rule["toPort"],
+            "protocol": rule["protocol"]
+        }
+        if "cidrBlocks" in rule:
+            transformed_rule["cidr_blocks"] = rule["cidrBlocks"]
+        if "ipv6CidrBlocks" in rule:
+            transformed_rule["ipv6_cidr_blocks"] = rule["ipv6CidrBlocks"]
+        transformed.append(transformed_rule)
+    return transformed
+
+
+
+# Create a security group and attach it to the VPC
+security_group = ec2.SecurityGroup(
+    'security-group',
+    name=security_group_name,
+    description="Enable web access",
+    ingress=transform_rules(ingress_rules),
+    egress=transform_rules(egress_rules),
+    vpc_id=vpc.id,
+
+    tags={
+        "Name": security_group_name
+    }
+)
 security_group_id = security_group.id

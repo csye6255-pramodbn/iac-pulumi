@@ -14,7 +14,8 @@ private_subnet_cidr = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 
 # EC2 Instance Default
 instance_name = "MyInstance"
-ami_id = "ami-06c6f10ccc6bfee60"
+ami_id = "ami-0e58206c8b17a9a3c"
+keypair_name = "mykey"
 num_instances = 1
 instance_type = "t2.micro"
 ebs_size = 25
@@ -46,6 +47,7 @@ cli_accidental_termination = config.get_bool('accidental_termination')
 cli_associate_public_ip = config.get_bool('associate_public_ip')
 cli_security_group_name = config.get('security_group_name')
 cli_sg_ingress_ports = config.get('sg_ingress_ports')
+cli_keypair_name = config.get('keypair_name')
 
 
 # Remove the brackets and strip unnecessary spaces
@@ -108,3 +110,6 @@ if cli_security_group_name:
 
 if c_sg_ingress_ports:
     sg_ingress_ports = c_sg_ingress_ports
+
+if cli_keypair_name:
+    keypair_name = cli_keypair_name
