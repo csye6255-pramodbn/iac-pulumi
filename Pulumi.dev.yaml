@@ -2,8 +2,9 @@ encryptionsalt: v1:2+F5i19gL/0=:v1:KynzAVyz2i9hHDfM:y1cQBSNukB7vLmlhDAiyLnIzI569
 config:
   Infra:private_subnets_cidr: '[ 10.200.4.0/24, 10.200.5.0/24, 10.200.6.0/24 ]'
   Infra:public_subnets_cidr: '[ 10.200.1.0/24, 10.200.2.0/24, 10.200.3.0/24 ]'
-  Infra:sg_ingress_ports: '[22,80,443,8080]'
+  Infra:sg_ingress_ports: '[80,443,8080]'
   Infra:vpc_cidr: 10.200.0.0/16
   Infra:vpc_name: My-VPC1
+  Infra:keypair_name: mykey
   aws:profile: dev
   aws:region: us-east-1
