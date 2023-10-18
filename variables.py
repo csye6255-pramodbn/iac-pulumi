@@ -23,7 +23,6 @@ ebs_type = "gp2"
 delete_on_termination = True
 accidental_termination = False
 associate_public_ip = True
-sg_ingress_ports = [22, 80, 443, 8080]
 security_group_name = "application security group"
 
 
@@ -46,19 +45,16 @@ cli_delete_on_termination = config.get_bool('delete_on_termination')
 cli_accidental_termination = config.get_bool('accidental_termination')
 cli_associate_public_ip = config.get_bool('associate_public_ip')
 cli_security_group_name = config.get('security_group_name')
-cli_sg_ingress_ports = config.get('sg_ingress_ports')
 cli_keypair_name = config.get('keypair_name')
 
 
 # Remove the brackets and strip unnecessary spaces
 clean_string_pub = cli_public_subnets_cidr.strip("[] ")
 clean_string_pri = cli_private_subnets_cidr.strip("[] ")
-clean_string_ports = cli_sg_ingress_ports.strip("[] ")
 
 # Split the string into a list based on comma separation
 c_pub_cidrs = [block.strip() for block in clean_string_pub.split(",")]
 c_pri_cidrs = [block.strip() for block in clean_string_pri.split(",")]
-c_sg_ingress_ports = [port.strip() for port in clean_string_ports.split(",")]
 
 
 # Override defaults if CLI config is truthy
@@ -107,9 +103,6 @@ if cli_associate_public_ip:
 
 if cli_security_group_name:
     security_group_name = cli_security_group_name
-
-if c_sg_ingress_ports:
-    sg_ingress_ports = c_sg_ingress_ports
 
 if cli_keypair_name:
     keypair_name = cli_keypair_name

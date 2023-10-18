@@ -1,9 +1,19 @@
 encryptionsalt: v1:yCnlKgAyyCk=:v1:RYnt2xGK7aD/xmEV:LdQgIrvVjI5t6mMSMCmG0adCsvONbw==
 config:
+  Infra:accidental_termination: "False"
+  Infra:ami_id: ami-0e58206c8b17a9a3c
+  Infra:associate_public_ip: "True"
+  Infra:delete_on_termination: "True"
+  Infra:ebs_size: "25"
+  Infra:ebs_type: gp2
+  Infra:instance_name: MyInstance
+  Infra:instance_type: t2.micro
+  Infra:keypair_name: mykey
+  Infra:num_instances: "1"
   Infra:private_subnets_cidr: '[ 10.200.4.0/24, 10.200.5.0/24, 10.200.6.0/24 ]'
   Infra:public_subnets_cidr: '[ 10.200.1.0/24, 10.200.2.0/24, 10.200.3.0/24 ]'
+  Infra:security_group_name: application security group
   Infra:vpc_cidr: 10.200.0.0/16
   Infra:vpc_name: My-VPC2
-  Infra:keypair_name: mykey
   aws:profile: demo
   aws:region: us-east-1
