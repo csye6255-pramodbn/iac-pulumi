@@ -5,5 +5,5 @@ import myVPC
 import fetch_myip
 import ports
 import security_group
-# import instance
-# import outputs
+import instance
+import outputs
