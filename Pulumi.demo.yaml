@@ -1,7 +1,7 @@
 encryptionsalt: v1:yCnlKgAyyCk=:v1:RYnt2xGK7aD/xmEV:LdQgIrvVjI5t6mMSMCmG0adCsvONbw==
 config:
   Infra:accidental_termination: "False"
-  Infra:ami_id: ami-0e58206c8b17a9a3c
+  Infra:ami_id: ami-0e9573cbdd33c093e
   Infra:associate_public_ip: "True"
   Infra:delete_on_termination: "True"
   Infra:ebs_size: "25"
