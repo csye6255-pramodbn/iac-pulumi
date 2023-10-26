@@ -1,8 +1,7 @@
 import pulumi
-from fetch_myip import my_ip_cidr
+from fetch_myip import *
 
-
-
+## Application Ingress and Egress Rules
 ingress_rules = [
     {
         'description': 'HTTP from Anywhere (IPv4)',
@@ -67,6 +66,7 @@ egress_rules = [
         'ipv6CidrBlocks': ['::/0']
     },
 ]
+
 
 
 __all__ = ['ingress_rules', 'egress_rules']

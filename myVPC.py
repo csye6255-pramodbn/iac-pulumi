@@ -1,6 +1,6 @@
 import pulumi
 from pulumi_aws import ec2, get_availability_zones
-from variables import vpc_cidr, private_subnet_cidr, public_subnet_cidr, vpc_name
+from variables import *
 
 
 avail_zones = get_availability_zones(state="available")

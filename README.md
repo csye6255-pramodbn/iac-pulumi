@@ -20,7 +20,7 @@ The code does the following:
 ### HTTP and HTTP-Related:
 - **Port 80 (HTTP)**: Open to all IPv4 and IPv6.
 - **Port 443 (HTTPS)**: Open to all IPv4 and IPv6.
-- **Port 8080 (Alternate HTTP)**: Open to all IPv4 and IPv6.
+- **Port 8080 (Application Port)**: Open to all IPv4 and IPv6.
 
 ### Outbound:
 - Allowed for all ports on both IPv4 and IPv6.
@@ -38,6 +38,27 @@ A custom security group has been created with the port configurations mentioned 
   - **Type**: General Purpose SSD (GP2).
 - **Security Group**: The previously described security group is attached to this EC2 instance.
 - **EBS Termination**: EBS volumes will be terminated concurrently with the EC2 instance termination.
+- **Userdata**: DB Configs to store in /etc/environment.
+
+## PostgreSQL RDS Setup on AWS
+
+### 📌 RDS Instance
+- **Name:** `csye6225`
+- **Engine:** PostgreSQL
+
+### 🌐 Subnet Group
+- Created using all the private subnets from the custom VPC.
+
+### 🔧 Parameter Group
+- **Parameter:** 
+  - `Max Connections`: 100
+
+### 🔒 Security Group
+- **Inbound Rule:**
+  - **Port:** `5432`
+  - **Source:** Application security group
+
+
 
 ## Prerequisites
 1. Install Python on your local system
@@ -64,6 +85,9 @@ Once "pulumi up" is run, the aforementioned resources would be created using the
 ## CLI Commands
 In order to create the above network stack using self-defined variables, you may customize the command mentioned below and run it:
 
+pulumi config set <key> <value>
+
+Example:
 pulumi config set aws:profile dev ; pulumi config set aws:region us-east-1 ; pulumi config set vpc_name My-VPC1 ; pulumi config set vpc_cidr 10.200.0.0/16 ; pulumi config set public_subnets_cidr '[ "10.200.1.0/24", "10.200.2.0/24", "10.200.3.0/24" ]' ; pulumi config set private_subnets_cidr '[ "10.200.4.0/24", "10.200.5.0/24", "10.200.6.0/24" ]' ; pulumi config set instance_name MyInstance ; pulumi config set ami_id ami-0e58206c8b17a9a3c ; pulumi config set keypair_name mykey ; pulumi config set num_instances 1 ; pulumi config set instance_type t2.micro ; pulumi config set ebs_size 25 ; pulumi config set ebs_type gp2 ; pulumi config set delete_on_termination True ; pulumi config set accidental_termination False ; pulumi config set associate_public_ip True ; pulumi config set security_group_name "application security group"
 
 

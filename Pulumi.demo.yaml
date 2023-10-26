@@ -1,14 +1,33 @@
 encryptionsalt: v1:yCnlKgAyyCk=:v1:RYnt2xGK7aD/xmEV:LdQgIrvVjI5t6mMSMCmG0adCsvONbw==
 config:
   Infra:accidental_termination: "False"
-  Infra:ami_id: ami-0e9573cbdd33c093e
+  Infra:ami_id: ami-008dc842a2ceccb17
   Infra:associate_public_ip: "True"
+  Infra:db_allocated_storage: "10"
+  Infra:db_dialect: postgres
+  Infra:db_engine: postgres
+  Infra:db_engine_version: "14.6"
+  Infra:db_identifier: csye6225
+  Infra:db_instance_class: db.t3.micro
+  Infra:db_max_allocated_storage: "50"
+  Infra:db_multi_az: "false"
+  Infra:db_name: csye6225
+  Infra:db_parameter_group_description: Parameter Group for CSYE 6225
+  Infra:db_parameter_group_family: postgres14
+  Infra:db_parameter_group_max_connections: "100"
+  Infra:db_parameter_group_name: csye6225
+  Infra:db_port: "5432"
+  Infra:db_publicly_accessible: "false"
+  Infra:db_security_group_name: database security group
+  Infra:db_skip_final_snapshot: "true"
+  Infra:db_username: csye6225
   Infra:delete_on_termination: "True"
   Infra:ebs_size: "25"
   Infra:ebs_type: gp2
   Infra:instance_name: MyInstance
   Infra:instance_type: t2.micro
   Infra:keypair_name: mykey
+  Infra:node_port: "8080"
   Infra:num_instances: "1"
   Infra:private_subnets_cidr: '[ 10.200.4.0/24, 10.200.5.0/24, 10.200.6.0/24 ]'
   Infra:public_subnets_cidr: '[ 10.200.1.0/24, 10.200.2.0/24, 10.200.3.0/24 ]'
