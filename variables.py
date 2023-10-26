@@ -26,6 +26,30 @@ associate_public_ip = True
 security_group_name = "application security group"
 
 
+# RDS Instance Default
+db_security_group_name = "database security group"
+db_engine = "postgres"
+db_engine_version = "14.6"
+db_instance_class = "db.t3.micro"
+db_identifier = "csye6225"
+db_multi_az = False
+db_username = "csye6225"
+db_name = "csye6225"
+db_publicly_accessible = False
+db_allocated_storage = 10
+db_max_allocated_storage = 50
+db_skip_final_snapshot = True
+
+db_parameter_group_name = "csye6225"
+db_parameter_group_family = "postgres14"
+db_parameter_group_description = "Parameter Group for CSYE 6225"
+db_parameter_group_max_connections = 100
+
+db_port = 5432
+node_port = 8080
+db_dialect = "postgres"
+
+
 ############################################################################################################
 
 # Get CLI configs from pulumi config file
@@ -46,7 +70,29 @@ cli_accidental_termination = config.get_bool('accidental_termination')
 cli_associate_public_ip = config.get_bool('associate_public_ip')
 cli_security_group_name = config.get('security_group_name')
 cli_keypair_name = config.get('keypair_name')
+cli_instance_name = config.get('instance_name')
 
+cli_db_security_group_name = config.get('db_security_group_name')
+cli_db_engine = config.get('db_engine')
+cli_db_engine_version = config.get('db_engine_version')
+cli_db_instance_class = config.get('db_instance_class')
+cli_db_identifier = config.get('db_identifier')
+cli_db_multi_az = config.get_bool('db_multi_az')
+cli_db_username = config.get('db_username')
+cli_db_name = config.get('db_name')
+cli_db_publicly_accessible = config.get_bool('db_publicly_accessible')
+cli_db_allocated_storage = config.get_int('db_allocated_storage')
+cli_db_max_allocated_storage = config.get_int('db_max_allocated_storage')
+cli_db_skip_final_snapshot = config.get_bool('db_skip_final_snapshot')
+
+cli_db_parameter_group_name = config.get('db_parameter_group_name')
+cli_db_parameter_group_family = config.get('db_parameter_group_family')
+cli_db_parameter_group_description = config.get('db_parameter_group_description')
+cli_db_parameter_group_max_connections = config.get_int('db_parameter_group_max_connections')
+
+cli_db_port = config.get_int('db_port')
+cli_node_port = config.get_int('node_port')
+cli_db_dialect = config.get('db_dialect')
 
 # Remove the brackets and strip unnecessary spaces
 clean_string_pub = cli_public_subnets_cidr.strip("[] ")
@@ -75,6 +121,7 @@ if c_pub_cidrs:
 
 if c_pri_cidrs:
    private_subnet_cidr = c_pri_cidrs
+
 
 
 if cli_ami_id:
@@ -106,3 +153,67 @@ if cli_security_group_name:
 
 if cli_keypair_name:
     keypair_name = cli_keypair_name
+
+if cli_instance_name:
+    instance_name = cli_instance_name
+
+if cli_db_security_group_name:
+    db_security_group_name = cli_db_security_group_name
+
+if cli_db_engine:
+    db_engine = cli_db_engine
+
+if cli_db_engine_version:
+    db_engine_version = cli_db_engine_version
+
+if cli_db_instance_class:
+    db_instance_class = cli_db_instance_class
+
+if cli_db_identifier:
+    db_identifier = cli_db_identifier
+
+if cli_db_multi_az:
+    db_multi_az = cli_db_multi_az
+
+if cli_db_username:
+    db_username = cli_db_username
+
+if cli_db_name:
+    db_name = cli_db_name
+
+if cli_db_publicly_accessible:
+    db_publicly_accessible = cli_db_publicly_accessible
+
+if cli_db_allocated_storage:
+    db_allocated_storage = cli_db_allocated_storage
+
+if cli_db_max_allocated_storage:
+    db_max_allocated_storage = cli_db_max_allocated_storage
+
+if cli_db_skip_final_snapshot:
+    db_skip_final_snapshot = cli_db_skip_final_snapshot
+
+
+
+if cli_db_parameter_group_name:
+    db_parameter_group_name = cli_db_parameter_group_name
+
+if cli_db_parameter_group_family:
+    db_parameter_group_family = cli_db_parameter_group_family
+
+if cli_db_parameter_group_description:
+    db_parameter_group_description = cli_db_parameter_group_description
+
+if cli_db_parameter_group_max_connections:
+    db_parameter_group_max_connections = cli_db_parameter_group_max_connections
+
+
+
+if cli_db_port:
+    db_port = cli_db_port
+
+if cli_node_port:
+    node_port = cli_node_port
+
+if cli_db_dialect:
+    db_dialect = cli_db_dialect
