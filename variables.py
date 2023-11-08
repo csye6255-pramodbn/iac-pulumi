@@ -58,6 +58,8 @@ A_record = 'A'
 # CloudWatch Defaults
 log_group_name = "csye6225"
 log_stream_name = "webapp"
+audit_log_group_name = "audit-group"
+audit_log_stream_name = "audit-stream"
 
 ############################################################################################################
 
