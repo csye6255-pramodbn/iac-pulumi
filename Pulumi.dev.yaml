@@ -1,7 +1,8 @@
 encryptionsalt: v1:2+F5i19gL/0=:v1:KynzAVyz2i9hHDfM:y1cQBSNukB7vLmlhDAiyLnIzI569QA==
 config:
+  Infra:A_record: A
   Infra:accidental_termination: "False"
-  Infra:ami_id: ami-0216a618194d941f9
+  Infra:ami_id: ami-07eab815a0d77afe8
   Infra:associate_public_ip: "True"
   Infra:db_allocated_storage: "10"
   Infra:db_dialect: postgres
@@ -27,12 +28,16 @@ config:
   Infra:instance_name: MyInstance
   Infra:instance_type: t2.micro
   Infra:keypair_name: mykey
+  Infra:log_group_name: csye6225
+  Infra:log_stream_name: webapp
   Infra:node_port: "8080"
   Infra:num_instances: "1"
   Infra:private_subnets_cidr: '[ 10.200.4.0/24, 10.200.5.0/24, 10.200.6.0/24 ]'
   Infra:public_subnets_cidr: '[ 10.200.1.0/24, 10.200.2.0/24, 10.200.3.0/24 ]'
   Infra:security_group_name: application security group
+  Infra:ttl: "300"
   Infra:vpc_cidr: 10.200.0.0/16
   Infra:vpc_name: My-VPC1
+  Infra:zone_name: dev.pramod.cloud
   aws:profile: dev
   aws:region: us-east-1
