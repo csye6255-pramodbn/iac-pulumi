@@ -50,6 +50,15 @@ node_port = 8080
 db_dialect = "postgres"
 
 
+# Route53 Defaults
+zone_name = 'demo.pramod.cloud'
+ttl = 300
+A_record = 'A'
+
+# CloudWatch Defaults
+log_group_name = "csye6225"
+log_stream_name = "webapp"
+
 ############################################################################################################
 
 # Get CLI configs from pulumi config file
@@ -93,6 +102,11 @@ cli_db_parameter_group_max_connections = config.get_int('db_parameter_group_max_
 cli_db_port = config.get_int('db_port')
 cli_node_port = config.get_int('node_port')
 cli_db_dialect = config.get('db_dialect')
+
+cli_zone_name = config.get('zone_name')
+
+cli_cloudwatch_log_group_name = config.get('log_group_name')
+cli_cloudwatch_log_stream_name = config.get('log_stream_name')
 
 # Remove the brackets and strip unnecessary spaces
 clean_string_pub = cli_public_subnets_cidr.strip("[] ")
@@ -217,3 +231,14 @@ if cli_node_port:
 
 if cli_db_dialect:
     db_dialect = cli_db_dialect
+
+
+if cli_zone_name:
+    zone_name = cli_zone_name
+
+
+if cli_cloudwatch_log_group_name:
+    log_group_name = cli_cloudwatch_log_group_name
+
+if cli_cloudwatch_log_stream_name:
+    log_stream_name = cli_cloudwatch_log_stream_name

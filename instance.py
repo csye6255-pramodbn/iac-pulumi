@@ -20,6 +20,10 @@ sudo echo DB_PASSWORD="{strong_password}" >> /etc/environment
 sudo echo DB_NAME="{db_name}" >> /etc/environment
 sudo echo DB_DIALECT="{db_dialect}" >> /etc/environment
 sudo systemctl daemon-reload
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/cloudwatch-config.json -s
+sudo systemctl enable amazon-cloudwatch-agent
+sudo systemctl start amazon-cloudwatch-agent
+sudo systemctl daemon-reload
 """
 
 # Using pulumi.Output.all to combine all outputs into a single tuple.
@@ -28,6 +32,9 @@ all_outputs = pulumi.Output.all(node_port, db.endpoint, db_username, strong_pass
 # Using the apply method to generate the user data script with the resolved values.
 user_data_script = all_outputs.apply(generate_user_data)
 
+public_ips = []
+instance_ids = []
+instance_names = []
 
 for i in range(num_instances):
     subnet_id = public_subnets[i % len(public_subnets)].id
@@ -48,7 +55,11 @@ for i in range(num_instances):
                             user_data=user_data_script,
                             iam_instance_profile=instance_profile.name,
                             tags={
-                                "Name": instance_name
+                                "Name": f"{instance_name}-{i+1}",
                             },
                             opts=pulumi.ResourceOptions(depends_on=[db])
                             )
+    
+    public_ips.append(instance.public_ip)
+    instance_ids.append(instance.id)
+    instance_names.append(instance.tags["Name"])
