@@ -2,7 +2,7 @@ encryptionsalt: v1:2+F5i19gL/0=:v1:KynzAVyz2i9hHDfM:y1cQBSNukB7vLmlhDAiyLnIzI569
 config:
   Infra:A_record: A
   Infra:accidental_termination: "False"
-  Infra:ami_id: ami-07eab815a0d77afe8
+  Infra:ami_id: ami-0dd320e2d78f59353
   Infra:associate_public_ip: "True"
   Infra:db_allocated_storage: "10"
   Infra:db_dialect: postgres
