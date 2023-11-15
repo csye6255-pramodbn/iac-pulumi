@@ -2,8 +2,49 @@ encryptionsalt: v1:2+F5i19gL/0=:v1:KynzAVyz2i9hHDfM:y1cQBSNukB7vLmlhDAiyLnIzI569
 config:
   Infra:A_record: A
   Infra:accidental_termination: "False"
-  Infra:ami_id: ami-0dd320e2d78f59353
+  Infra:alb_evaluate_target_health: "true"
+  Infra:ami_id: ami-00cb1f9b2f09d8022
+  Infra:application_security_group_name: application-security-group
+  Infra:asg_accidental_termination: "false"
+  Infra:asg_adjustment_type: ChangeInCapacity
+  Infra:asg_application_name: csye6225_webapp
+  Infra:asg_associate_public_ip_address: "true"
+  Infra:asg_comparison_operator_down: LessThanThreshold
+  Infra:asg_comparison_operator_up: GreaterThanThreshold
+  Infra:asg_cooldown_period: "60"
+  Infra:asg_cpu_metric_name: CPUUtilization
+  Infra:asg_cpu_threshold_down: "3"
+  Infra:asg_cpu_threshold_up: "5"
+  Infra:asg_delete_on_termination: "true"
+  Infra:asg_desired_capacity: "1"
+  Infra:asg_device_name: /dev/xvda
+  Infra:asg_ebs_volume_size: "25"
+  Infra:asg_ebs_volume_type: gp2
+  Infra:asg_ec2_instance_type: t2.micro
+  Infra:asg_environment: dev
+  Infra:asg_evaluation_periods: "1"
+  Infra:asg_high_alaram_description: Scale up if CPU > 5% for 1 minute
+  Infra:asg_high_alaram_name: high_cpu
+  Infra:asg_instance_name: my-asg-instance
+  Infra:asg_key_name: mykey
+  Infra:asg_key1: Name
+  Infra:asg_key2: Environment
+  Infra:asg_launch_config_name: asg_launch_config
+  Infra:asg_low_alaram_description: Scale down if CPU < 3% for 1 minute
+  Infra:asg_low_alaram_name: low_cpu
+  Infra:asg_max_size: "3"
+  Infra:asg_min_size: "1"
+  Infra:asg_name: MyASG
+  Infra:asg_namespace: AWS/EC2
+  Infra:asg_policy_type: SimpleScaling
+  Infra:asg_propagate_at_launch: "true"
+  Infra:asg_scaling_decrement: "-1"
+  Infra:asg_scaling_increment: "1"
+  Infra:asg_scaling_period: "60"
+  Infra:asg_statistic: Average
   Infra:associate_public_ip: "True"
+  Infra:audit_log_group_name: audit-group
+  Infra:audit_log_stream_name: audit-stream
   Infra:db_allocated_storage: "10"
   Infra:db_dialect: postgres
   Infra:db_engine: postgres
@@ -13,13 +54,15 @@ config:
   Infra:db_max_allocated_storage: "50"
   Infra:db_multi_az: "false"
   Infra:db_name: csye6225
-  Infra:db_parameter_group_description: Parameter Group for CSYE 6225
+  Infra:db_parameter_group_description: Parameter-Group-for-CSYE-6225
   Infra:db_parameter_group_family: postgres14
   Infra:db_parameter_group_max_connections: "100"
   Infra:db_parameter_group_name: csye6225
+  Infra:db_password:
+    secure: v1:a9X3vXhiHshc7oEv:XRAwahs11m+tdEbIztYPRI3uCtjSBNrJCCCOA4BwxJCbq7nEJNM4cuSp1w==
   Infra:db_port: "5432"
   Infra:db_publicly_accessible: "false"
-  Infra:db_security_group_name: database security group
+  Infra:db_security_group_name: database-security-group
   Infra:db_skip_final_snapshot: "true"
   Infra:db_username: csye6225
   Infra:delete_on_termination: "True"
@@ -28,13 +71,32 @@ config:
   Infra:instance_name: MyInstance
   Infra:instance_type: t2.micro
   Infra:keypair_name: mykey
+  Infra:lb_enable_deletion_protection: "false"
+  Infra:lb_internal: "false"
+  Infra:lb_ip_address_type: ipv4
+  Infra:lb_listener_default_actions_type: forward
+  Infra:lb_listener_port: "80"
+  Infra:lb_listner_name: MyListener
+  Infra:lb_load_balancer_type: application
+  Infra:lb_name: MyALB
+  Infra:lb_type: application
+  Infra:loadbalancer_security_group_name: loadbalancer-security-group
   Infra:log_group_name: csye6225
   Infra:log_stream_name: webapp
   Infra:node_port: "8080"
   Infra:num_instances: "1"
   Infra:private_subnets_cidr: '[ 10.200.4.0/24, 10.200.5.0/24, 10.200.6.0/24 ]'
   Infra:public_subnets_cidr: '[ 10.200.1.0/24, 10.200.2.0/24, 10.200.3.0/24 ]'
-  Infra:security_group_name: application security group
+  Infra:tg_enable: "true"
+  Infra:tg_healthy_threshold: "5"
+  Infra:tg_interval: "60"
+  Infra:tg_ip_address_type: ipv4
+  Infra:tg_name: MyTargetGroup
+  Infra:tg_path: /healthz
+  Infra:tg_port: "8080"
+  Infra:tg_protocol: HTTP
+  Infra:tg_target_type: instance
+  Infra:tg_timeout: "30"
   Infra:ttl: "300"
   Infra:vpc_cidr: 10.200.0.0/16
   Infra:vpc_name: My-VPC1

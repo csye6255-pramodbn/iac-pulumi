@@ -4,9 +4,7 @@ import pulumi_aws as aws
 from pulumi_aws import ec2, rds
 from myVPC import *
 from variables import *
-from security_group import *
-
-
+from application_security_group import *
 
 
 
@@ -17,20 +15,9 @@ db_ingress_rules = [
         'fromPort': 5432,
         'toPort': 5432,
         'protocol': 'tcp',
-        #'cidrBlocks': ['0.0.0.0/0'],
-        'security_groups': [security_group_id]
+        'security_groups': [application_security_group_id]
     },
 ]
-
-# db_egress_rules = [
-#     {
-#         'protocol': '-1',
-#         'fromPort': 0,
-#         'toPort': 0,
-#         'cidrBlocks': ['0.0.0.0/0'],
-#         'ipv6CidrBlocks': ['::/0']
-#     },
-# ]
 
 # Database Security Group
 db_security_group = ec2.SecurityGroup(
@@ -45,6 +32,17 @@ db_security_group = ec2.SecurityGroup(
         "Name": db_security_group_name
     }
 )
+db_security_group_id = db_security_group.id
+
+# # Updating the Egress Rule for Application Security Group
+# egress_rule = ec2.SecurityGroupRule("egress_rule",
+#     type="egress",
+#     from_port=0,
+#     to_port=0,
+#     protocol="-1",
+#     source_security_group_id=db_security_group_id,
+#     security_group_id=application_security_group_id
+# )
 
 # Parameter Group for RDS
 postgres_param_group = aws.rds.ParameterGroup(
@@ -71,7 +69,9 @@ db_subnet_group = rds.SubnetGroup("db-subnet-group",
 )
 
 # Random Password Generator
-strong_password = secrets.token_urlsafe(16)
+
+strong_password = db_password
+# strong_password = secrets.token_urlsafe(16)
 
 # Creating RDS
 db = rds.Instance('postgres',
