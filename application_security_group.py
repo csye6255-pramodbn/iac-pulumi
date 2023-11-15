@@ -1,7 +1,9 @@
 import pulumi
 from pulumi_aws import ec2
+import pulumi_aws as aws
 from ports import *
 from myVPC import *
+from load_balancer import *
 from variables import *
 
 
@@ -21,26 +23,33 @@ def transform_rules(rules):
             transformed_rule["ipv6_cidr_blocks"] = rule["ipv6CidrBlocks"]
         if "securityGroupId" in rule:
             transformed_rule["source_security_group_id"] = rule["securityGroupId"]
+        if "security_groups" in rule:
+            transformed_rule["security_groups"] = rule["security_groups"]
         transformed.append(transformed_rule)
     return transformed
 
 
-
-# Create a security group and attach it to the VPC
-security_group = ec2.SecurityGroup(
+# Create a EC2 Security Group and attach it to the VPC
+application_security_group = ec2.SecurityGroup(
     'security-group',
-    name=security_group_name,
+    name=application_security_group_name,
     description="Application Security Group",
-    ingress=transform_rules(ingress_rules),
-    egress=transform_rules(egress_rules),
+    ingress=transform_rules(app_ingress_rules),
+    egress=transform_rules(app_egress_rules),
     vpc_id=vpc.id,
     tags={
-        "Name": security_group_name
+        "Name": application_security_group_name
     }
 )
+application_security_group_id = application_security_group.id
 
 
-
-
-
-security_group_id = security_group.id
+# # Updating the Egress Rule for Load Balancer Security Group
+# egress_rule = ec2.SecurityGroupRule("egress_rule",
+#     type="egress",
+#     from_port=0,
+#     to_port=0,
+#     protocol="-1",
+#     source_security_group_id=application_security_group_id,
+#     security_group_id=lb_security_group_id
+# )

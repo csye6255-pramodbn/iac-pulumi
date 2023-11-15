@@ -4,9 +4,11 @@ import pulumi
 import myVPC
 import fetch_myip
 import ports
-import security_group
+import application_security_group
+import load_balancer
+import iam_policy
+import auto_scaling_group
 import rds_postgress
-import instance
 import hosted_zone
 import cloudwatch_group_stream
 import outputs

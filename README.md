@@ -12,22 +12,19 @@ The code does the following:
 5. Creates a private route table and attaches all private subnets created to the route table
 6. Creates a public route in the public route table created above with the destination CIDR block 0.0.0.0/0 and the internet gateway created above as the target
 
-## Ports Configuration
+## Application Security Group
 
 ### SSH:
-- **Access**: Only from my IP.
+- **Port: 22**
+- **Source: Only from my IP**
 
-### HTTP and HTTP-Related:
-- **Port 80 (HTTP)**: Open to all IPv4 and IPv6.
-- **Port 443 (HTTPS)**: Open to all IPv4 and IPv6.
-- **Port 8080 (Application Port)**: Open to all IPv4 and IPv6.
+### Application Port:
+- **Port: 8080**
+-  **Source: ALB security group**
 
 ### Outbound:
 - Allowed for all ports on both IPv4 and IPv6.
 
-## Security Group
-
-A custom security group has been created with the port configurations mentioned above. This group is associated with my custom VPC.
 
 ## IAM Roles
 
@@ -67,6 +64,43 @@ A custom security group has been created with the port configurations mentioned 
 - **Inbound Rule:**
   - **Port:** `5432`
   - **Source:** Application security group
+
+# Load Balancer Configuration
+
+This README outlines the configuration for our load balancer setup, including details on the Application Load Balancer (ALB), Target Group, Listener, Auto Scaling Group (ASG), ASG Policies, and DNS Record.
+
+## Application Load Balancer (ALB)
+
+- **Type:** Internet Facing
+- **Security Group Settings:**
+  - **Ingress:** Ports 80 and 443
+  - **Egress:** All Traffic
+
+## Target Group
+
+- **Targets:** Port 8080
+- **Health Checks:** Checks applications at `/healthz`
+
+## Listener
+
+- **Listens:** On port 80
+- **Forwards:** To port 8080
+
+## Auto Scaling Group (ASG)
+
+- **Desired Capacity:** 1
+- **Minimum Capacity:** 1
+- **Maximum Capacity:** 3
+
+## ASG Policy
+
+- **Scale Up:** When average CPU usage is above 5%. Increment by 1.
+- **Scale Down:** When average CPU usage is below 3%. Decrement by 1.
+
+## DNS Record
+
+- **Type:** A record
+- **Points to:** ALB `dns_name`
 
 
 ## CloudWatch
