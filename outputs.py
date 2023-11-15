@@ -38,7 +38,6 @@ pulumi.export('audit_log_stream_name', audit_log_stream.name)
 pulumi.export("lb_name", alb.name)
 pulumi.export("lb_dns_name", alb_dns_name)
 pulumi.export("target_group_name", target_group.name)
-pulumi.export("listeners_name", listener.name)
 pulumi.export("listning_port", listener.port)
 pulumi.export("forwarding_port", target_group.port)
 
