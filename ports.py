@@ -28,7 +28,7 @@ app_egress_rules = [
         'fromPort': 0,
         'toPort': 0,
         'protocol': -1,
-        'cidrBlocks': ['0.0.0./0'],
+        'cidrBlocks': ['0.0.0.0/0'],
         'ipv6CidrBlocks': ['::/0'],
     },
 ]
