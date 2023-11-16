@@ -27,22 +27,22 @@ db_security_group = ec2.SecurityGroup(
     ingress= db_ingress_rules,
     #egress= db_egress_rules,
     vpc_id=vpc.id,
-
     tags={
         "Name": db_security_group_name
     }
 )
 db_security_group_id = db_security_group.id
 
-# # Updating the Egress Rule for Application Security Group
-# egress_rule = ec2.SecurityGroupRule("egress_rule",
-#     type="egress",
-#     from_port=0,
-#     to_port=0,
-#     protocol="-1",
-#     source_security_group_id=db_security_group_id,
-#     security_group_id=application_security_group_id
-# )
+# Updating the Egress Rule for Application Security Group
+egress_rule = ec2.SecurityGroupRule('app_egress_rule',
+    type='egress',
+    from_port=5432,
+    to_port=5432,
+    protocol='tcp',
+    description='Allowing traffic from port 5432 to database security group',
+    source_security_group_id=db_security_group_id,
+    security_group_id=application_security_group_id
+)
 
 # Parameter Group for RDS
 postgres_param_group = aws.rds.ParameterGroup(
