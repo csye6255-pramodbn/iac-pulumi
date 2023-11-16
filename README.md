@@ -23,7 +23,7 @@ The code does the following:
 -  **Source: ALB security group**
 
 ### Outbound:
-- Allowed for all ports on both IPv4 and IPv6.
+- **Allowing traffic from port 5432 to database security group**
 
 
 ## IAM Roles
@@ -74,7 +74,7 @@ This README outlines the configuration for our load balancer setup, including de
 - **Type:** Internet Facing
 - **Security Group Settings:**
   - **Ingress:** Ports 80 and 443
-  - **Egress:** All Traffic
+  - **Egress:** Allowing traffic from port 8080 to application security group
 
 ## Target Group
 

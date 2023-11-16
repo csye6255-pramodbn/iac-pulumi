@@ -48,16 +48,6 @@ lb_ingress_rules = [
     },
 ]
 
-lb_egress_rules = [
-    {
-        'description': 'All Traffic',
-        'fromPort': 0,
-        'toPort': 0,
-        'protocol': -1,
-        'cidrBlocks': ['0.0.0.0/0'],
-        'ipv6CidrBlocks': ['::/0'],
-    },        
-]
 
 
 # Create a Load Balancer Security Group and attach it to the VPC
@@ -66,7 +56,7 @@ lb_security_group = ec2.SecurityGroup(
     name=loadbalancer_security_group_name,
     description="Application Security Group",
     ingress=transform_rules(lb_ingress_rules),
-    egress=transform_rules(lb_egress_rules),
+    # egress: lets update it later after creating application security group
     vpc_id=vpc.id,
     tags={
         "Name": loadbalancer_security_group_name
@@ -89,7 +79,7 @@ target_group = aws.lb.TargetGroup(tg_name,
         "enabled": tg_enable, # true
         "healthy_threshold": tg_healthy_threshold, # 5
         "interval": tg_interval, # 60
-        "path": tg_path, # "/health"
+        "path": tg_path, # "/healthz"
         "port": tg_port, # 8080
         "timeout": tg_timeout, # 30   
     },
@@ -115,6 +105,7 @@ alb = aws.lb.LoadBalancer(lb_name,
 listener = aws.lb.Listener(lb_listner_name,
     load_balancer_arn=alb.arn,
     port=lb_listener_port, # 80
+    protocol=lb_listener_protocol, # HTTP
     default_actions=[{
         "type": lb_listener_default_actions_type, # forward
         "target_group_arn": target_group.arn

@@ -35,7 +35,7 @@ application_security_group = ec2.SecurityGroup(
     name=application_security_group_name,
     description="Application Security Group",
     ingress=transform_rules(app_ingress_rules),
-    egress=transform_rules(app_egress_rules),
+    # egress=transform_rules(app_egress_rules),
     vpc_id=vpc.id,
     tags={
         "Name": application_security_group_name
@@ -44,12 +44,13 @@ application_security_group = ec2.SecurityGroup(
 application_security_group_id = application_security_group.id
 
 
-# # Updating the Egress Rule for Load Balancer Security Group
-# egress_rule = ec2.SecurityGroupRule("egress_rule",
-#     type="egress",
-#     from_port=0,
-#     to_port=0,
-#     protocol="-1",
-#     source_security_group_id=application_security_group_id,
-#     security_group_id=lb_security_group_id
-# )
+# Updating the Egress Rule for Load Balancer Security Group
+egress_rule = ec2.SecurityGroupRule('lb_egress_rule',
+    type='egress',
+    from_port=8080,
+    to_port=8080,
+    protocol='tcp',
+    description='Allowing traffic from port 8080 to application security group',
+    source_security_group_id=application_security_group_id,
+    security_group_id=lb_security_group_id
+)

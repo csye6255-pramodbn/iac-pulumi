@@ -76,6 +76,7 @@ config:
   Infra:lb_ip_address_type: ipv4
   Infra:lb_listener_default_actions_type: forward
   Infra:lb_listener_port: "80"
+  Infra:lb_listener_protocol: HTTP
   Infra:lb_listner_name: MyListener
   Infra:lb_load_balancer_type: application
   Infra:lb_name: MyALB

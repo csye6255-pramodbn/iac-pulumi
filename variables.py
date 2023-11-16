@@ -94,6 +94,7 @@ alb_evaluate_target_health = True
 lb_listner_name = "MyListener"
 lb_type = "application"
 lb_listener_port = 80
+lb_listener_protocol = "HTTP"
 lb_listener_default_actions_type = "forward"
 
 # Launch Template Defaults
@@ -228,6 +229,7 @@ cli_alb_evaluate_target_health = config.get('alb_evaluate_target_health')
 cli_lb_listner_name = config.get('lb_listner_name')
 cli_lb_type = config.get('lb_type')
 cli_lb_listener_port = config.get('lb_listener_port')
+cli_lb_listener_protocol = config.get('lb_listener_protocol')
 cli_lb_listener_default_actions_type = config.get('lb_listener_default_actions_type')
 
 # Launch Template Defaults
@@ -294,19 +296,14 @@ c_pri_cidrs = [block.strip() for block in clean_string_pri.split(",")]
 # VPC Defaults
 if cli_profile:
     profile = cli_profile
-
 if cli_region:
     region = cli_region
-
 if cli_vpc_name:
     vpc_name = cli_vpc_name
-    
 if cli_vpc_cidr:
     vpc_cidr = cli_vpc_cidr
-
 if c_pub_cidrs:
    public_subnet_cidr = c_pub_cidrs
-
 if c_pri_cidrs:
    private_subnet_cidr = c_pri_cidrs
 
@@ -314,34 +311,24 @@ if c_pri_cidrs:
 # EC2 Instance Default
 if cli_ami_id:
     ami_id = cli_ami_id
-
 if cli_num_instances:
     num_instances = cli_num_instances
-
 if cli_instance_type:
     instance_type = cli_instance_type
-
 if cli_ebs_size:
     ebs_size = cli_ebs_size
-
 if cli_ebs_type:
     ebs_type = cli_ebs_type
-
 if cli_delete_on_termination:
     delete_on_termination = cli_delete_on_termination
-
 if cli_accidental_termination:
     accidental_termination = cli_accidental_termination
-
 if cli_associate_public_ip:
     associate_public_ip = cli_associate_public_ip
-
 if cli_security_group_name:
     security_group_name = cli_security_group_name
-
 if cli_keypair_name:
     keypair_name = cli_keypair_name
-
 if cli_instance_name:
     instance_name = cli_instance_name
 
@@ -349,63 +336,46 @@ if cli_instance_name:
 # RDS Instance Default
 if cli_db_security_group_name:
     db_security_group_name = cli_db_security_group_name
-
 if cli_db_engine:
     db_engine = cli_db_engine
-
 if cli_db_engine_version:
     db_engine_version = cli_db_engine_version
-
 if cli_db_instance_class:
     db_instance_class = cli_db_instance_class
-
 if cli_db_identifier:
     db_identifier = cli_db_identifier
-
 if cli_db_multi_az:
     db_multi_az = cli_db_multi_az
-
 if cli_db_username:
     db_username = cli_db_username
-
 if cli_db_name:
     db_name = cli_db_name
-
 if cli_db_password:
     db_password = cli_db_password
-
 if cli_db_publicly_accessible:
     db_publicly_accessible = cli_db_publicly_accessible
-
 if cli_db_allocated_storage:
     db_allocated_storage = cli_db_allocated_storage
-
 if cli_db_max_allocated_storage:
     db_max_allocated_storage = cli_db_max_allocated_storage
-
 if cli_db_skip_final_snapshot:
     db_skip_final_snapshot = cli_db_skip_final_snapshot
 
 # Parameter Group for RDS Defaults
 if cli_db_parameter_group_name:
     db_parameter_group_name = cli_db_parameter_group_name
-
 if cli_db_parameter_group_family:
     db_parameter_group_family = cli_db_parameter_group_family
-
 if cli_db_parameter_group_description:
     db_parameter_group_description = cli_db_parameter_group_description
-
 if cli_db_parameter_group_max_connections:
     db_parameter_group_max_connections = cli_db_parameter_group_max_connections
 
 # For EC2 User Data
 if cli_db_port:
     db_port = cli_db_port
-
 if cli_node_port:
     node_port = cli_node_port
-
 if cli_db_dialect:
     db_dialect = cli_db_dialect
 
@@ -413,10 +383,8 @@ if cli_db_dialect:
 # Route53 Defaults
 if cli_zone_name:
     zone_name = cli_zone_name
-
 if cli_ttl:
     ttl = cli_ttl
-
 if cli_A_record:
     A_record = cli_A_record
 
@@ -424,13 +392,10 @@ if cli_A_record:
 # CloudWatch Defaults
 if cli_cloudwatch_log_group_name:
     log_group_name = cli_cloudwatch_log_group_name
-
 if cli_cloudwatch_log_stream_name:
     log_stream_name = cli_cloudwatch_log_stream_name
-
 if cli_audit_log_group_name:
     audit_log_group_name = cli_audit_log_group_name
-
 if cli_audit_log_stream_name:
     audit_log_stream_name = cli_audit_log_stream_name
 
@@ -482,6 +447,8 @@ if cli_lb_type:
     lb_type = cli_lb_type
 if cli_lb_listener_port:
     lb_listener_port = cli_lb_listener_port
+if cli_lb_listener_protocol:
+    lb_listener_protocol = cli_lb_listener_protocol
 if cli_lb_listener_default_actions_type:
     lb_listener_default_actions_type = cli_lb_listener_default_actions_type
 
