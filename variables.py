@@ -221,6 +221,7 @@ cli_cloudwatch_log_group_name = config.get('log_group_name')
 cli_cloudwatch_log_stream_name = config.get('log_stream_name')
 cli_audit_log_group_name = config.get('audit_log_group_name')
 cli_audit_log_stream_name = config.get('audit_log_stream_name')
+cli_lambda_log_group_name = config.get('lambda_log_group_name')
 
 # Target Group Defaults
 cli_tg_name = config.get('tg_name')
@@ -436,6 +437,8 @@ if cli_audit_log_group_name:
     audit_log_group_name = cli_audit_log_group_name
 if cli_audit_log_stream_name:
     audit_log_stream_name = cli_audit_log_stream_name
+if cli_lambda_log_group_name:
+    lambda_log_group_name = cli_lambda_log_group_name
 
 
 # Target Group Defaults
