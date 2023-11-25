@@ -66,6 +66,8 @@ log_group_name = "csye6225"
 log_stream_name = "webapp"
 audit_log_group_name = "audit-group"
 audit_log_stream_name = "audit-stream"
+lambda_log_group_name = "lambda-group"
+lambda_log_stream_name = "lambda-stream"
 
 # Target Group Defaults
 tg_name = "MyTargetGroup"
@@ -139,6 +141,24 @@ asg_comparison_operator_down = "LessThanThreshold"
 asg_cpu_threshold_up = 5
 asg_cpu_threshold_down = 3
 asg_namespace = "AWS/EC2"
+
+# Lambda Defaults
+lambda_name = "mylambda"
+
+# SNS Defaults
+sns_topic_name = "myTopic"
+sns_subscription_name = "mySubscription"
+
+# GCP Defaults
+gcp_bucket_name = "mybucket"
+gcp_bucket_location = "US"
+bucket_force_destroy = True
+project_id = "dev-gcp-405522"
+gcp_service_account_name = "my-service-account"
+gcp_service_display_account_name = "My-Storage-Admin-Service-Account"
+
+# DynamoDB Defaults
+dynamodb_table_name = "myDynamo"
 
 ############################################################################################################
 
@@ -274,6 +294,24 @@ cli_asg_comparison_operator_down = config.get('asg_comparison_operator_down')
 cli_asg_cpu_threshold_up = config.get('asg_cpu_threshold_up')
 cli_asg_cpu_threshold_down = config.get('asg_cpu_threshold_down')
 cli_asg_namespace = config.get('asg_namespace')
+
+# Lambda Defaults
+cli_lambda_name = config.get('lambda_name')
+
+# SNS Defaults
+cli_sns_topic_name = config.get('sns_topic_name')
+cli_sns_subscription_name = config.get('sns_subscription_name')
+
+# GCP Defaults
+cli_project_id = config.get("gcp:project")
+cli_gcp_bucket_name = config.get("gcp_bucket_name")
+cli_gcp_bucket_location = config.get("gcp_bucket_location")
+cli_bucket_force_destroy = config.get_bool("bucket_force_destroy")
+cli_gcp_service_account_name = config.get("gcp_service_account_name")
+cli_gcp_service_display_account_name = config.get("gcp_service_display_account_name")
+
+# DynamoDB Defaults
+cli_dynamodb_table_name = config.get("dynamodb_table_name")
 
 
 ############################################################################################################
@@ -531,3 +569,27 @@ if cli_asg_cpu_threshold_down:
     asg_cpu_threshold_down = cli_asg_cpu_threshold_down
 if cli_asg_namespace:
     asg_namespace = cli_asg_namespace
+
+# Lambda Defaults
+if cli_lambda_name:
+    lambda_name = cli_lambda_name
+
+# SNS Defaults
+if cli_sns_topic_name:
+    sns_topic_name = cli_sns_topic_name
+if cli_sns_subscription_name:
+    sns_subscription_name = cli_sns_subscription_name
+
+# GCP Defaults
+if cli_project_id:
+    project_id = cli_project_id
+if cli_gcp_bucket_name:
+    gcp_bucket_name = cli_gcp_bucket_name
+if cli_gcp_bucket_location:
+    gcp_bucket_location = cli_gcp_bucket_location
+if cli_bucket_force_destroy:
+    bucket_force_destroy = cli_bucket_force_destroy
+if cli_gcp_service_account_name:
+    gcp_service_account_name = cli_gcp_service_account_name
+if cli_gcp_service_display_account_name:
+    gcp_service_display_account_name = cli_gcp_service_display_account_name

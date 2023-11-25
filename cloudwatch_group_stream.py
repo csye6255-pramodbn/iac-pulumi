@@ -19,3 +19,12 @@ audit_log_group = cloudwatch.LogGroup('audit-group',
 audit_log_stream = cloudwatch.LogStream('audit-stream',
                                         name=audit_log_stream_name,
                                         log_group_name=audit_log_group.name)
+
+# # Lambda Log Group
+# lambda_log_group = cloudwatch.LogGroup('lambda-group',
+#                                        name=lambda_log_group_name)
+
+# # Lambda Log Stream
+# lambda_log_stream = cloudwatch.LogStream('lambda-stream',
+#                                          name=lambda_log_stream_name,
+#                                          log_group_name=lambda_log_group.name)

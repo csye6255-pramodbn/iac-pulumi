@@ -6,6 +6,9 @@ from hosted_zone import *
 from cloudwatch_group_stream import *
 from load_balancer import *
 from auto_scaling_group import *
+from sns import *
+from aws_lambda import *
+from dynamodb import *
 
 # VPC
 pulumi.export("region", region)
@@ -25,8 +28,6 @@ pulumi.export("db_password", db.password)
 pulumi.export("hosted_zone_name", hosted_zone.name)
 pulumi.export('demo_record_type', sub_record.type)
 pulumi.export('demo_record_name', sub_record.name)
-pulumi.export('www_record_type', www_record.type)
-pulumi.export('www_record_name', www_record.name)
 
 # CloudWatch
 pulumi.export('log_group_name', log_group.name)
@@ -48,3 +49,13 @@ pulumi.export("scale_up_policy", scale_up_policy.name)
 pulumi.export("scale_down_policy", scale_down_policy.name)
 pulumi.export("high_cpu_alarm", high_cpu_alarm.name)
 pulumi.export("low_cpu_alarm", low_cpu_alarm.name)
+
+# SNS
+pulumi.export("sns_topic_name", sns_topic.name)
+
+# Lambda
+pulumi.export("lambda_function_name", lambda_func.name)
+
+# DynamoDB
+pulumi.export("dynamodb_table_name", dynamodb_table.name)
+

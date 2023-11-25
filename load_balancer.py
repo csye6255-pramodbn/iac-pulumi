@@ -48,6 +48,17 @@ lb_ingress_rules = [
     },
 ]
 
+# Load Balancer Egress Rules
+lb_egress_rules = [
+    {
+        'description': 'All traffic',
+        'fromPort': 0,
+        'toPort': 0,
+        'protocol': '-1',
+        'cidrBlocks': ['0.0.0.0/0'],
+        'ipv6CidrBlocks': ['::/0'],
+    },
+]
 
 
 # Create a Load Balancer Security Group and attach it to the VPC
@@ -56,7 +67,7 @@ lb_security_group = ec2.SecurityGroup(
     name=loadbalancer_security_group_name,
     description="Application Security Group",
     ingress=transform_rules(lb_ingress_rules),
-    # egress: lets update it later after creating application security group
+    egress=transform_rules(lb_egress_rules),
     vpc_id=vpc.id,
     tags={
         "Name": loadbalancer_security_group_name
