@@ -5,6 +5,7 @@ from application_security_group import *
 from myVPC import *
 from rds_postgress import *
 from iam_policy import *
+from sns import *
 import base64
 
 #######################################################################################################################
@@ -13,7 +14,7 @@ def generate_user_data(args):
   if not all(args):
     raise Exception("Invalid inputs")
 
-  node_port, db_endpoint, db_username, db_password, db_name, db_dialect = args
+  node_port, db_endpoint, db_username, db_password, db_name, db_dialect, topic_arn ,sns_region = args
 
   db_host, db_port = db_endpoint.split(':')
 
@@ -26,6 +27,8 @@ def generate_user_data(args):
   sudo echo "DB_PASSWORD={db_password}" >> /etc/environment
   sudo echo "DB_NAME={db_name}" >> /etc/environment  
   sudo echo "DB_DIALECT={db_dialect}" >> /etc/environment
+  sudo echo "TOPIC_ARN={topic_arn}" >> /etc/environment
+  sudo echo "SNS_REGION={sns_region}" >> /etc/environment
   sudo systemctl daemon-reload
   sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/cloudwatch-config.json -s
   sudo systemctl enable amazon-cloudwatch-agent
@@ -37,7 +40,7 @@ def generate_user_data(args):
 
 
 # Resolve outputs
-outputs = pulumi.Output.all(node_port, db.endpoint, db_username, strong_password, db_name, db_dialect) 
+outputs = pulumi.Output.all(node_port, db.endpoint, db_username, strong_password, db_name, db_dialect, topic_arn, sns_region) 
 
 # Generate user data 
 user_data = outputs.apply(generate_user_data)

@@ -3,7 +3,7 @@ config:
   Infra:A_record: A
   Infra:accidental_termination: "False"
   Infra:alb_evaluate_target_health: "true"
-  Infra:ami_id: ami-00cb1f9b2f09d8022
+  Infra:ami_id: ami-08b2570754bb51a1f
   Infra:application_security_group_name: application-security-group
   Infra:asg_accidental_termination: "false"
   Infra:asg_adjustment_type: ChangeInCapacity
@@ -45,6 +45,7 @@ config:
   Infra:associate_public_ip: "True"
   Infra:audit_log_group_name: audit-group
   Infra:audit_log_stream_name: audit-stream
+  Infra:bucket_force_destroy: "true"
   Infra:db_allocated_storage: "10"
   Infra:db_dialect: postgres
   Infra:db_engine: postgres
@@ -66,11 +67,17 @@ config:
   Infra:db_skip_final_snapshot: "true"
   Infra:db_username: csye6225
   Infra:delete_on_termination: "True"
+  Infra:dynamodb_table_name: myDynamo
   Infra:ebs_size: "25"
   Infra:ebs_type: gp2
+  Infra:gcp_bucket_location: US
+  Infra:gcp_bucket_name: mybucket
+  Infra:gcp_service_account_name: my-service-account
+  Infra:gcp_service_display_account_name: My-Storage-Admin-Service-Account
   Infra:instance_name: MyInstance
   Infra:instance_type: t2.micro
   Infra:keypair_name: mykey
+  Infra:lambda_name: mylambda
   Infra:lb_enable_deletion_protection: "false"
   Infra:lb_internal: "false"
   Infra:lb_ip_address_type: ipv4
@@ -88,6 +95,8 @@ config:
   Infra:num_instances: "1"
   Infra:private_subnets_cidr: '[ 10.200.4.0/24, 10.200.5.0/24, 10.200.6.0/24 ]'
   Infra:public_subnets_cidr: '[ 10.200.1.0/24, 10.200.2.0/24, 10.200.3.0/24 ]'
+  Infra:sns_subscription_name: mySubscription
+  Infra:sns_topic_name: myTopic
   Infra:tg_enable: "true"
   Infra:tg_healthy_threshold: "5"
   Infra:tg_interval: "60"
@@ -104,3 +113,4 @@ config:
   Infra:zone_name: dev.pramod.cloud
   aws:profile: dev
   aws:region: us-east-1
+  gcp:project: dev-gcp-405522

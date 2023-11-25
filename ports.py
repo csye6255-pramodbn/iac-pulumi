@@ -21,6 +21,15 @@ app_ingress_rules = [
     },
 ] 
 
-# Egress: Lets update it later after creating database security group
+app_egress_rules = [
+    {
+        'description': 'All traffic',
+        'fromPort': 0,
+        'toPort': 0,
+        'protocol': '-1',
+        'cidrBlocks': ['0.0.0.0/0'],
+        'ipv6CidrBlocks': ['::/0'],
+    },
+]
 
-__all__ = ['app_ingress_rules']
+__all__ = ['app_ingress_rules', 'app_egress_rules']
