@@ -3,7 +3,7 @@ config:
   Infra:A_record: A
   Infra:accidental_termination: "False"
   Infra:alb_evaluate_target_health: "true"
-  Infra:ami_id: ami-08b2570754bb51a1f
+  Infra:ami_id: ami-0a1aa866e9f7b485c
   Infra:application_security_group_name: application-security-group
   Infra:asg_accidental_termination: "false"
   Infra:asg_adjustment_type: ChangeInCapacity

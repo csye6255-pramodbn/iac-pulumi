@@ -12,8 +12,8 @@ lambda_func = lambda_.Function(lambda_name,
     runtime= "nodejs16.x",
     handler="index.lambdaHandler",
     role=lambda_policy_arn,
-    #code=pulumi.AssetArchive({ '.': pulumi.FileArchive('./serverless') }),
-    code=pulumi.FileArchive("serverless.zip"),
+    code=pulumi.AssetArchive({ '.': pulumi.FileArchive('./serverless') }),
+    #code=pulumi.FileArchive("serverless.zip"),
     timeout=500,
     environment={
         "variables": {
