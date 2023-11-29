@@ -3,8 +3,6 @@ from pulumi_aws import lambda_
 from variables import *
 from iam_policy import *
 from gcloud import *
-import pulumi_aws as aws
-import json
 from dynamodb import *
 
 # Create Lambda function with NodeJS 14.x runtime

@@ -56,6 +56,10 @@ pulumi.export("sns_topic_name", sns_topic.name)
 # Lambda
 pulumi.export("lambda_function_name", lambda_func.name)
 
+# GCP
+pulumi.export("gcp_bucket_name", bucket.name)
+pulumi.export("gcp_service_account_name", gcp_service_account.name)
+pulumi.export("gcp_access_key", gcp_access_key.private_key)
+
 # DynamoDB
 pulumi.export("dynamodb_table_name", dynamodb_table.name)
-
