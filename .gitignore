@@ -1,3 +1,4 @@
 *.pyc
 venv/
 serverless/
+serverless.zip

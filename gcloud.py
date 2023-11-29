@@ -2,11 +2,10 @@ import pulumi
 from pulumi_gcp import storage, serviceaccount, iam, projects
 import pulumi_gcp as gcp
 from variables import *
-import json
 import pulumi_aws as aws
 
 # Create GCS bucket
-bucket = storage.Bucket(gcp_bucket_name,
+bucket = storage.Bucket(gcp_bucket_name, # "my-bucket"
     location=gcp_bucket_location, # US
     force_destroy=bucket_force_destroy, # True
 )
@@ -26,5 +25,3 @@ gcp_bucket_iam = storage.BucketIAMMember('bucket-admin',
 gcp_access_key = serviceaccount.Key('my-access-key',
    service_account_id=gcp_service_account.name,
    public_key_type='TYPE_X509_PEM_FILE')
-
-pulumi.export('service_account_key', gcp_access_key.private_key)
