@@ -1,6 +1,6 @@
 from pulumi_aws import ec2
 import pulumi_aws as aws
-from ports import *
+from app_ports import *
 from myVPC import *
 from variables import *
 from myVPC import *
@@ -30,14 +30,14 @@ def transform_rules(rules):
 
 # Load Balancer Ingress Rules
 lb_ingress_rules = [
-    {
-        'description': 'HTTP from Anywhere (IPv4)',
-        'fromPort': 80,
-        'toPort': 80,
-        'protocol': 'tcp',
-        'cidrBlocks': ['0.0.0.0/0'],
-        'ipv6CidrBlocks': ['::/0'],
-    },       
+    # {
+    #     'description': 'HTTP from Anywhere (IPv4)',
+    #     'fromPort': 80,
+    #     'toPort': 80,
+    #     'protocol': 'tcp',
+    #     'cidrBlocks': ['0.0.0.0/0'],
+    #     'ipv6CidrBlocks': ['::/0'],
+    # },       
     {
         'description': 'HTTPS from Anywhere (IPv4)',
         'fromPort': 443,
@@ -81,6 +81,7 @@ lb_security_group_id = lb_security_group.id
 
 # Target Group                                                                                                               
 target_group = aws.lb.TargetGroup(tg_name,
+    name=tg_name,
     port=tg_port, # 8080
     protocol=tg_protocol, # HTTP
     vpc_id=vpc.id,
@@ -101,6 +102,7 @@ target_group_id = target_group.id
 
 # Load Balancer
 alb = aws.lb.LoadBalancer(lb_name,
+    name=lb_name,
     internal=lb_internal, # false
     security_groups=[lb_security_group_id],
     subnets=public_subnets,
@@ -115,8 +117,10 @@ alb = aws.lb.LoadBalancer(lb_name,
 # Listener
 listener = aws.lb.Listener(lb_listner_name,
     load_balancer_arn=alb.arn,
-    port=lb_listener_port, # 80
-    protocol=lb_listener_protocol, # HTTP
+    ssl_policy=ssl_security_policy,  # ELBSecurityPolicy-TLS13-1-2-2021-06
+    certificate_arn=ssl_certificate_arn,
+    port=lb_listener_port, # 443
+    protocol=lb_listener_protocol, # HTTPS
     default_actions=[{
         "type": lb_listener_default_actions_type, # forward
         "target_group_arn": target_group.arn

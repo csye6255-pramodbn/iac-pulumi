@@ -1,7 +1,7 @@
 import pulumi
 from pulumi_aws import ec2
 import pulumi_aws as aws
-from ports import *
+from app_ports import *
 from myVPC import *
 from load_balancer import *
 from variables import *

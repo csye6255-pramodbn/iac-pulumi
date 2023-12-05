@@ -3,7 +3,7 @@ import pulumi
 # opts = pulumi.ResourceOptions(provider=provider.provider) # Pass provider to resource options
 import myVPC
 import fetch_myip
-import ports
+import app_ports
 import application_security_group
 import load_balancer
 import iam_policy

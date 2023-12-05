@@ -95,9 +95,11 @@ alb_evaluate_target_health = True
 # Load Balancer Listener Defaults
 lb_listner_name = "MyListener"
 lb_type = "application"
-lb_listener_port = 80
-lb_listener_protocol = "HTTP"
+lb_listener_port = 443
+lb_listener_protocol = "HTTPS"
 lb_listener_default_actions_type = "forward"
+ssl_security_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+ssl_certificate_arn = "arn:aws:acm:us-east-1:201635325056:certificate/d32e1f6b-aaa4-49e3-b0e8-823087139c39"
 
 # Launch Template Defaults
 asg_launch_config_name = "asg_launch_config"
@@ -143,7 +145,7 @@ asg_cpu_threshold_down = 3
 asg_namespace = "AWS/EC2"
 
 # Lambda Defaults
-lambda_name = "mylambda"
+lambda_name = "myLambda"
 
 # SNS Defaults
 sns_topic_name = "myTopic"
@@ -252,6 +254,8 @@ cli_lb_type = config.get('lb_type')
 cli_lb_listener_port = config.get('lb_listener_port')
 cli_lb_listener_protocol = config.get('lb_listener_protocol')
 cli_lb_listener_default_actions_type = config.get('lb_listener_default_actions_type')
+cli_ssl_certificate_arn = config.get('ssl_certificate_arn')
+cli_ssl_security_policy = config.get('ssl_security_policy')
 
 # Launch Template Defaults
 cli_asg_launch_config_name = config.get('asg_launch_config_name')
@@ -492,6 +496,10 @@ if cli_lb_listener_protocol:
     lb_listener_protocol = cli_lb_listener_protocol
 if cli_lb_listener_default_actions_type:
     lb_listener_default_actions_type = cli_lb_listener_default_actions_type
+if cli_ssl_certificate_arn:
+    ssl_certificate_arn = cli_ssl_certificate_arn
+if cli_ssl_security_policy:
+    ssl_security_policy = cli_ssl_security_policy
 
 # Launch Template Defaults
 if cli_asg_launch_config_name:
