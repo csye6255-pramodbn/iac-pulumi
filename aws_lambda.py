@@ -7,6 +7,7 @@ from dynamodb import *
 
 # Create Lambda function with NodeJS 14.x runtime
 lambda_func = lambda_.Function(lambda_name,
+    name=lambda_name,
     runtime= "nodejs16.x",
     handler="index.lambdaHandler",
     role=lambda_policy_arn,

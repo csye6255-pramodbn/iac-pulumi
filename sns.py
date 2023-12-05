@@ -6,7 +6,7 @@ from iam_policy import *
 
 
 # Create an SNS topic
-sns_topic = sns.Topic(sns_topic_name)
+sns_topic = sns.Topic(sns_topic_name, name=sns_topic_name)
 topic_arn = sns_topic.arn
 
 # store the sns region in a variable

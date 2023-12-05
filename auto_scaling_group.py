@@ -82,6 +82,7 @@ launch_template = ec2.LaunchTemplate(asg_launch_config_name,
 
 # Auto Scaling Group
 csye6225_asg = autoscaling.Group(asg_name,
+    name=asg_name,
     desired_capacity=asg_desired_capacity, # 1
     max_size=asg_max_size, # 3
     min_size=asg_min_size, # 1

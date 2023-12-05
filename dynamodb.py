@@ -4,7 +4,7 @@ from pulumi_aws import dynamodb
 from variables import *
 
 # Creating the DynamoDB table.
-dynamodb_table = dynamodb.Table(dynamodb_table_name,
+dynamodb_table = dynamodb.Table(dynamodb_table_name, name=dynamodb_table_name,
     attributes=[
         {"name": "ID", "type": "S"},
         {"name": "Name", "type": "S"},
