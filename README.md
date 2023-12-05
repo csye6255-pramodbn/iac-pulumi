@@ -77,7 +77,7 @@ This README outlines the configuration for our load balancer setup, including de
 
 - **Type:** Internet Facing
 - **Security Group Settings:**
-  - **Ingress:** Ports 80 and 443
+  - **Ingress:** Ports 443
   - **Egress:** Allowing traffic from port 8080 to application security group
 
 ## Target Group
@@ -87,7 +87,7 @@ This README outlines the configuration for our load balancer setup, including de
 
 ## Listener
 
-- **Listens:** On port 80
+- **Listens:** On port 443
 - **Forwards:** To port 8080
 
 ## Auto Scaling Group (ASG)
@@ -173,6 +173,13 @@ This README outlines the configuration for our load balancer setup, including de
 
 - Subdomain: dev.pramod.cloud / demo.pramod.cloud
 
+## SSL Certificate Import to ACM - Command
+
+### Switch to Demo Profile
+- set AWS_PROFILE="demo"
+
+### Command to import
+- aws acm --profile=demo import-certificate --certificate fileb://C:/Users/pramo/Desktop/ssl/demo_pramod_cloud.crt --certificate-chain fileb://C:/Users/pramo/Desktop/ssl/demo_pramod_cloud.ca-bundle --private-key fileb://C:/Users/pramo/Desktop/ssl/private.key
 
 ## Prerequisites
 1. Install Python on your local system
